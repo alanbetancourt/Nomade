@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nómade - Tapas & Records</title>
+  <meta name="description" content="Nómade - A unique tapas and records experience in San Diego. Enjoy Spanish cuisine and great music in a relaxed atmosphere.">
+  <meta name="keywords" content="tapas, records, San Diego, Spanish cuisine, restaurant">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <div class="container">
+    <div class="left-side">
+      <img src="images/logov1.png" alt="Nómade Logo" class="main-logo">
+      <nav>
+        <ul>
+          <li><a href="#" class="open-popup" data-popup="menu-popup" aria-label="View Menu">Menu</a></li>
+          <li><a href="#" class="open-popup" data-popup="about-popup" aria-label="About Nómade">About</a></li>
+          <li><a href="https://www.opentable.com/" target="_blank" aria-label="Make a Reservation">Reserve</a></li>
+          <li><a href="mailto:contacto@nomade.com" aria-label="Contact Us">Contact</a></li>
+          <li><a href="https://www.instagram.com/nomade.sd" target="_blank" aria-label="Follow us on Instagram">Follow</a></li>
+        </ul>
+      </nav>
+      <a href="https://www.google.com/maps?q=3027+Adams+Ave+San+Diego+CA" target="_blank" class="address" aria-label="View our location on Google Maps">
+        3027 ADAMS AVE<br>SAN DIEGO     CA
+      </a>
+      <p class="tagline">TAPAS + RECORDS</p>
+    </div>
+
+    <div class="right-side">
+      <div id="slideshow" aria-label="Image slideshow">
+        <img src="images/imagen1.jpg" class="slide active" alt="Nómade interior view">
+        <img src="images/imagen2.jpg" class="slide" alt="Tapas dish">
+        <img src="images/imagen3.jpg" class="slide" alt="Record player">
+        <img src="images/imagen4.jpg" class="slide" alt="Bar area">
+        <img src="images/imagen5.jpg" class="slide" alt="Outdoor seating">
+        <img src="images/imagen6.jpg" class="slide" alt="Chef preparing food">
+        <img src="images/imagen7.jpg" class="slide" alt="Cocktail selection">
+        <img src="images/imagen8.jpg" class="slide" alt="Vinyl records collection">
+      </div>
+      <div class="floating-illustrations" aria-hidden="true">
+        <img src="images/ilustracion1.png" class="illustration" alt="">
+        <img src="images/ilustracion2.png" class="illustration" alt="">
+        <img src="images/ilustracion3.png" class="illustration" alt="">
+        <img src="images/ilustracion4.png" class="illustration" alt="">
+        <img src="images/ilustracion5.png" class="illustration" alt="">
+        <img src="images/ilustracion6.png" class="illustration" alt="">
+      </div>
+    </div>
+
+    <div id="menu-popup" class="popup hidden" role="dialog" aria-labelledby="menu-title">
+      <button class="close-popup" aria-label="Close menu">Close</button>
+      <h2 id="menu-title">Menu</h2>
+      <h3>Starters</h3>
+      <ul>
+        <li>Olives marinated in citrus and herbs - $6</li>
+        <li>Almond & Honey Crostini - $8</li>
+      </ul>
+      <h3>Mains</h3>
+      <ul>
+        <li>Paella Valenciana - $24</li>
+        <li>Grilled Octopus - $22</li>
+      </ul>
+      <!-- Add more categories as needed -->
+    </div>
+
+    <div id="about-popup" class="popup hidden" role="dialog" aria-labelledby="about-title">
+      <button class="close-popup" aria-label="Close about section">Close</button>
+      <h2 id="about-title">Where Culinary Exploration Meets a Relaxed, Refined Atmosphere</h2>
+      <p>Inspired by the spirit of wanderers...</p>
+      <img src="images/logov2.png" alt="Nómade Logo" class="about-logo">
+    </div>
+  </div>
+
+  <button id="back-to-top" aria-label="Back to top">↑</button>
+
+  <noscript>
+    <p>This website requires JavaScript to function properly. Please enable JavaScript in your browser settings.</p>
+  </noscript>
+
+  <script src="script.js"></script>
+</body>
+</html>

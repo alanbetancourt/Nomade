@@ -1,0 +1,625 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Update the font-face declaration */
+  @font-face {
+    font-family: 'Akkurat';
+    src: url('fonts/Akkurat-Light.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  /* Apply the light font to the body */
+  body {
+    font-family: 'Akkurat', sans-serif;
+    font-weight: normal;
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+    color: #F5F4F3;
+  }
+  
+  .container {
+    display: flex;
+    width: 100%;
+  }
+  
+  /* Incluir fuentes personalizadas */
+  @font-face {
+    font-family: 'Aether Mono';
+    src: url('fonts/AetherMono-B.otf') format('opentype');
+    font-weight: bold;
+  }
+  
+  .address, .popup h2, .popup p, .popup ul, .tagline {
+    font-family: 'Aether Mono', monospace;
+    text-transform: uppercase;
+  }
+  
+  /* Aplicación de fuentes */
+  .main-logo, .tagline {
+    font-family: 'Aether Mono', monospace;
+  }
+  
+  /* Estilos del lado izquierdo */
+  .left-side {
+    width: 50%;
+    background-color: #404032;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px;
+    position: relative;
+  }
+  
+  .main-logo {
+    width: 200px; /* Increased from 150px */
+    align-self: flex-start;
+  }
+  
+  nav {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+  }
+  
+  nav ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 4px; /* Space between flex items */
+  }
+  
+  nav ul li {
+    margin: 0; /* Reset margin as we're using gap */
+  }
+  
+  nav ul li a {
+    color: #F5F4F3;
+    text-decoration: none;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: normal;
+    position: relative;
+    overflow: hidden;
+    padding: 3px 0; /* Slight vertical padding for larger click area */
+    display: inline-block; /* This helps with the padding */
+    font-family: 'Akkurat', sans-serif;
+  }
+  
+  nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #F2E1D3;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
+  
+  nav ul li a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+  
+  nav ul li a.active {
+    color: #F2E1D3;
+    font-weight: normal;
+  }
+  
+  .address {
+    color: #F5F4F3;
+    text-decoration: none;
+    padding: 14px 20px; /* Even more padding */
+    border: 1px solid #F5F4F3;
+    border-radius: 8px; /* Rounded corners */
+    display: inline-block;
+    text-align: center;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+  }
+  
+  .address:hover {
+    background-color: rgba(245, 244, 243, 0.1); /* Slight highlight on hover */
+  }
+  
+  /* Tagline alineado a la derecha */
+  .tagline {
+    position: absolute;
+    top: 72px;
+    right: 40px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #F5F4F3;
+  }
+  
+  /* Estilos del slideshow */
+  .right-side {
+    width: 50%;
+    position: relative;
+  }
+  
+  #slideshow {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  .slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+  }
+  
+  .slide.active {
+    opacity: 1;
+  }
+  
+  /* Animación de las ilustraciones */
+  .floating-illustrations {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: scroll 60s linear infinite;
+    animation-delay: 0s;
+  }
+  
+  .illustration {
+    width: 600px;
+    margin-bottom: 120px;
+    margin-top: 120px;
+  }
+  
+  @keyframes scroll {
+    0% { transform: translateX(-50%) translateY(0); }
+    100% { transform: translateX(-50%) translateY(-100%); }
+  }
+  
+  /* Estilos del popup */
+  .popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #F5F4F3;
+    padding: 40px;
+    border-radius: 20px; /* Add this line for rounded corners */
+    width: 80%;
+    max-width: 600px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease, transform 0.5s ease;
+    transform: translate(-50%, -60%);
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow */
+    font-size: 0.9em; /* This will make all text in the popup slightly smaller */
+  }
+  
+  .popup:not(.hidden) {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%);
+  }
+  
+  .popup button {
+    background-color: #404032;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+
+  .popup h2, .popup h3, .popup p, .popup ul {
+    text-align: center; /* Ensure all text elements are center-aligned */
+  }
+  
+  .popup ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+    }
+  
+    .left-side, .right-side {
+      width: 100%;
+      height: 50vh;
+    }
+  
+    .left-side {
+      padding: 20px;
+      justify-content: flex-start;
+    }
+  
+    .main-logo {
+      margin-bottom: 20px;
+    }
+  
+    .tagline {
+      position: absolute;
+      top: 40px;
+      right: 20px;
+    }
+  
+    nav {
+      margin: 20px 0;
+    }
+  
+    #slideshow {
+      height: 100%;
+    }
+  
+    .floating-illustrations {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      animation: scroll-mobile 20s linear infinite; /* Reduced from 30s to 20s for faster animation */
+    }
+  
+    .illustration {
+      width: 80%;
+      max-width: 300px;
+      margin-bottom: 30px;
+    }
+  
+    @keyframes scroll-mobile {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-50%); }
+    }
+  
+    .popup {
+      width: 90%;
+      max-width: none;
+    }
+  }
+
+.hidden {
+  display: none;
+}
+
+.popup {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.popup.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Increase the size of the main logo (logov1) */
+.main-logo {
+  width: 200px; /* Increased from 150px */
+  align-self: flex-start;
+}
+
+/* Adjust the popup styles */
+.popup {
+  /* ... existing styles ... */
+  padding: 40px; /* Increased padding for more space */
+}
+
+/* Decrease the size of the logo in the popup (logov2) */
+.about-logo {
+  width: 180px; /* Adjust this value as needed */
+  margin-top: 24px; /* Increase the gap between text and logo */
+}
+
+/* Increase the gap between elements in the popup */
+.popup h2 {
+  margin-bottom: 20px; /* Adjust as needed */
+}
+
+.popup p {
+  margin-bottom: 30px; /* Adjust as needed */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .main-logo {
+    width: 150px; /* Slightly smaller on mobile */
+  }
+
+  .popup {
+    padding: 30px; /* Slightly less padding on mobile */
+  }
+
+  .about-logo {
+    width: 180px; /* Smaller on mobile */
+    margin-top: 20px; /* Less gap on mobile */
+  }
+}
+
+/* ... existing styles ... */
+
+.popup button.close-popup {
+  background: none;
+  border: none;
+  color: #404032;
+  cursor: pointer;
+  font-size: 0.9em;
+  font-family: 'Akkurat', sans-serif;
+  text-transform: capitalize;
+  letter-spacing: 1px;
+  padding: 0;
+  margin-bottom: 30px; /* Increased from 20px to 30px */
+  transition: opacity 0.3s ease;
+}
+
+.popup button.close-popup:hover {
+  opacity: 0.7;
+}
+
+.popup button.close-popup:focus {
+  outline: none;
+}
+
+/* ... rest of your styles ... */
+
+@media (max-width: 768px) {
+  /* ... other mobile styles ... */
+
+  .right-side {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .floating-illustrations {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    animation: scroll-mobile 20s linear infinite; /* Reduced from 30s to 20s for faster animation */
+  }
+
+  .illustration {
+    width: 100%;
+    max-width: 360px;
+    margin-bottom: 30px;
+  }
+
+  @keyframes scroll-mobile {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
+  }
+}
+
+.popup h2, .popup h3, .popup p, .popup li {
+  font-weight: normal;
+}
+
+.popup h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.popup ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+/* Smooth scroll effect */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hover effects for navigation links */
+nav ul li a:hover {
+  color: #F2E1D3;
+  transition: color 0.3s ease;
+}
+
+/* Back to top button */
+#back-to-top {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #404032;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+#back-to-top:hover {
+  opacity: 1;
+}
+
+/* Loading indicator */
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #404032;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Additional breakpoints */
+@media (max-width: 1024px) {
+  /* Styles for tablets and smaller desktops */
+}
+
+@media (max-width: 480px) {
+  /* Styles for smaller mobile devices */
+}
+
+/* Styles for when JavaScript is disabled */
+.no-js .slideshow {
+  display: none;
+}
+
+.no-js .floating-illustrations {
+  display: none;
+}
+
+.no-js .noscript-message {
+  display: block;
+  text-align: center;
+  padding: 20px;
+  background-color: #f8d7da;
+  color: #721c24;
+  margin-bottom: 20px;
+}
+
+/* ... rest of your styles ... */
+
+/* Elegant microinteractions for links */
+nav ul li a {
+  position: relative;
+  overflow: hidden;
+}
+
+nav ul li a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #F2E1D3;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+nav ul li a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Microinteraction for buttons */
+.popup button.close-popup {
+  position: relative;
+  overflow: hidden;
+}
+
+.popup button.close-popup::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  transition: left 0.3s ease;
+}
+
+.popup button.close-popup:hover::before {
+  left: 100%;
+}
+
+/* Subtle scale effect for the logo */
+.main-logo {
+  transition: transform 0.3s ease;
+}
+
+.main-logo:hover {
+  transform: scale(1.05);
+}
+
+/* Elegant fade-in effect for popup content */
+.popup:not(.hidden) h2,
+.popup:not(.hidden) p,
+.popup:not(.hidden) ul {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .left-side {
+    background: #404032; /* Solid color for mobile */
+    animation: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .popup button.close-popup {
+    font-size: 1em; /* Slightly larger on mobile for better touch targets */
+  }
+}
+
+@media (max-width: 768px) {
+  nav ul {
+    gap: 10px; /* Slightly less space on mobile if needed */
+  }
+}
+
+/* Popup styles */
+.popup {
+  background-color: #F5F4F3;
+}
+
+/* Popup text color */
+.popup h2, .popup h3, .popup p, .popup li {
+  color: #404032;
+}
+
+/* Close button in popups */
+.popup button.close-popup {
+  color: #404032;
+}
+
+/* ... rest of your styles ... */
