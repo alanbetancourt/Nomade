@@ -21,6 +21,7 @@
     height: 100vh;
     overflow: hidden;
     color: #F5F4F3;
+    font-size: 14px; /* Base font size reduced */
   }
   
   .container {
@@ -53,13 +54,14 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    padding: 40px;
-    position: relative;
+    padding: 40px 20px;
+    min-height: 100vh;
+    position: relative; /* Add this to allow absolute positioning of children */
   }
   
   .main-logo {
-    width: 200px; /* Increased from 150px */
-    align-self: flex-start;
+    width: 140px; /* Slightly reduced logo size */
+    margin-bottom: 18px;
   }
   
   nav {
@@ -74,24 +76,23 @@
     text-align: center;
     display: flex;
     flex-direction: column;
-    gap: 4px; /* Space between flex items */
+    gap: 5px; /* Gap for larger screens */
   }
   
   nav ul li {
-    margin: 0; /* Reset margin as we're using gap */
+    margin: 0;
   }
   
   nav ul li a {
     color: #F5F4F3;
     text-decoration: none;
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: normal;
     position: relative;
     overflow: hidden;
-    padding: 3px 0; /* Slight vertical padding for larger click area */
-    display: inline-block; /* This helps with the padding */
-    font-family: 'Akkurat', sans-serif;
+    padding: 1px 0;
+    display: inline-block;
   }
   
   nav ul li a::after {
@@ -120,33 +121,34 @@
   .address {
     color: #F5F4F3;
     text-decoration: none;
-    padding: 14px 20px; /* Even more padding */
+    padding: 10px 16px; /* Slightly reduced padding */
     border: 1px solid #F5F4F3;
-    border-radius: 8px; /* Rounded corners */
+    border-radius: 8px;
     display: inline-block;
     text-align: center;
     margin-top: 20px;
     transition: all 0.3s ease;
+    font-size: 0.75rem; /* Decreased from 0.85rem */
   }
   
   .address:hover {
-    background-color: rgba(245, 244, 243, 0.1); /* Slight highlight on hover */
+    background-color: rgba(245, 244, 243, 0.1);
   }
   
   /* Tagline alineado a la derecha */
   .tagline {
     position: absolute;
-    top: 72px;
-    right: 40px;
-    font-size: 1rem;
-    font-weight: bold;
-    text-transform: uppercase;
+    top: 60px; /* Aligns with the top padding of .left-side */
+    right: 20px; /* Aligns with the right padding of .left-side */
+    font-size: 0.8rem; /* Reduced size */
     color: #F5F4F3;
   }
   
   /* Estilos del slideshow */
   .right-side {
     width: 50%;
+    height: 100vh;
+    overflow: hidden;
     position: relative;
   }
   
@@ -180,9 +182,9 @@
   }
   
   .illustration {
-    width: 600px;
-    margin-bottom: 120px;
-    margin-top: 120px;
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 30px;
   }
   
   @keyframes scroll {
@@ -190,24 +192,84 @@
     100% { transform: translateX(-50%) translateY(-100%); }
   }
   
+  /* Ensure popups appear above illustrations */
+  .popup {
+    z-index: 20;
+  }
+  
   /* Estilos del popup */
   .popup {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(0.9);
     background-color: #F5F4F3;
-    padding: 40px;
-    border-radius: 20px; /* Add this line for rounded corners */
-    width: 80%;
-    max-width: 600px;
+    padding: 30px;
+    border-radius: 8px;
+    max-width: 80%;
+    width: 400px;
+    max-height: 80vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.5s ease, visibility 0.5s ease, transform 0.5s ease;
-    transform: translate(-50%, -60%);
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow */
-    font-size: 0.9em; /* This will make all text in the popup slightly smaller */
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+  }
+  
+  .popup.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  
+  .popup-header {
+    position: sticky;
+    top: 0;
+    background-color: #F5F4F3;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    z-index: 1;
+    display: flex;
+    justify-content: center; /* Center the close button horizontally */
+  }
+  
+  .popup-content {
+    overflow-y: auto;
+    flex-grow: 1;
+  }
+  
+  .popup button.close-popup {
+    align-self: center; /* Center the close button vertically */
+    background: none;
+    border: none;
+    color: #404032;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-family: 'Akkurat', sans-serif;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    padding: 0;
+    margin-bottom: 20px;
+  }
+  
+  /* Scrollbar styles */
+  .popup::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .popup::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  .popup::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+  }
+  
+  .popup::-webkit-scrollbar-thumb:hover {
+    background: #555;
   }
   
   .popup:not(.hidden) {
@@ -267,28 +329,36 @@
     }
   
     .floating-illustrations {
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
-      right: 0;
       width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      animation: scroll-mobile 20s linear infinite; /* Reduced from 30s to 20s for faster animation */
+      height: 100vh;
+      transform: none;
+      animation: none;
+      overflow-x: hidden;
+      white-space: nowrap;
+    }
+  
+    .illustration-container {
+      display: inline-block;
+      animation: slide 40s linear infinite; /* Increased duration */
     }
   
     .illustration {
-      width: 80%;
-      max-width: 300px;
-      margin-bottom: 30px;
+      display: inline-block;
+      width: auto;
+      height: 70vh;
+      max-width: none;
+      max-height: 100%;
+      margin: 0 20px;
+      vertical-align: middle;
+      object-fit: contain;
     }
   
-    @keyframes scroll-mobile {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-50%); }
+    @keyframes slide {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(0); }
     }
   
     .popup {
@@ -400,7 +470,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    animation: scroll-mobile 20s linear infinite; /* Reduced from 30s to 20s for faster animation */
+    animation: scroll-mobile 20s linear infinite; /* Faster */
   }
 
   .illustration {
@@ -603,7 +673,12 @@ nav ul li a:hover::after {
 
 @media (max-width: 768px) {
   nav ul {
-    gap: 10px; /* Slightly less space on mobile if needed */
+    gap: 2px; /* Reduced gap for mobile screens */
+  }
+
+  nav ul li a {
+    font-size: 0.9rem;
+    padding: 1px 0;
   }
 }
 
@@ -623,3 +698,119 @@ nav ul li a:hover::after {
 }
 
 /* ... rest of your styles ... */
+
+@media (max-width: 768px) {
+  .left-side {
+    width: 100%;
+    min-height: auto;
+    padding: 30px 20px;
+  }
+
+  nav ul {
+    gap: 10px;
+  }
+
+  nav ul li a {
+    font-size: 1rem;
+  }
+
+  .main-logo {
+    width: 120px;
+    margin-bottom: 15px;
+  }
+
+  .address, .tagline {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-height: 600px) {
+  .left-side {
+    padding: 20px;
+  }
+
+  nav ul {
+    gap: 6px;
+  }
+
+  nav ul li a {
+    font-size: 0.9rem;
+  }
+
+  .main-logo {
+    width: 100px;
+    margin-bottom: 10px;
+  }
+
+  .address, .tagline {
+    font-size: 0.7rem;
+    padding: 8px 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .address {
+    font-size: 0.7rem; /* Even smaller on mobile */
+    padding: 8px 14px; /* Further reduced padding for mobile */
+  }
+}
+
+@media (max-width: 768px) {
+  .left-side {
+    width: 100%;
+    height: auto;
+    min-height: 60vh; /* Increased from previous value */
+  }
+
+  .right-side {
+    width: 100%;
+    height: 40vh; /* Decreased from 50vh or whatever it was before */
+  }
+
+  .floating-illustrations {
+    height: 60vh; /* Match the height of .right-side */
+  }
+
+  @keyframes scroll-mobile {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(calc(-100% + 60vh)); } /* Adjusted for new height */
+  }
+}
+
+/* Center the logo in the about popup */
+#about-popup .about-logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 180px; /* Adjust this value as needed */
+  margin-top: 24px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

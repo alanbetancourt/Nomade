@@ -6,13 +6,25 @@ function closeAllPopups() {
   popups.forEach(popup => popup.classList.add('hidden'));
 }
 
+// Function to open a specific popup
+function openPopup(popupId) {
+  const popup = document.getElementById(popupId);
+  if (popup) {
+    closeAllPopups(); // Close any open popups first
+    popup.classList.remove('hidden');
+  }
+}
+
 // Event delegation for opening popups
 document.addEventListener('click', (e) => {
   if (e.target.classList.contains('open-popup')) {
     e.preventDefault();
     const popupId = e.target.getAttribute('data-popup');
-    closeAllPopups();
-    document.getElementById(popupId).classList.remove('hidden');
+    if (popupId === 'menu-popup') {
+      openPopup('menuPopup'); // Match the ID in your HTML
+    } else {
+      openPopup(popupId);
+    }
   }
 });
 
@@ -26,6 +38,9 @@ document.addEventListener('click', (e) => {
     }
   }
 });
+
+// Close all popups when the page loads
+document.addEventListener('DOMContentLoaded', closeAllPopups);
 
 // Slideshow functionality
 const slides = document.querySelectorAll('.slide');
