@@ -20,11 +20,7 @@ document.addEventListener('click', (e) => {
   if (e.target.classList.contains('open-popup')) {
     e.preventDefault();
     const popupId = e.target.getAttribute('data-popup');
-    if (popupId === 'menu-popup') {
-      openPopup('menuPopup'); // Match the ID in your HTML
-    } else {
-      openPopup(popupId);
-    }
+    openPopup(popupId);
   }
 });
 
