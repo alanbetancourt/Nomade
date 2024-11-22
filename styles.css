@@ -132,7 +132,7 @@
   }
   
   .address:hover {
-    background-color: rgba(245, 244, 243, 0.1);
+    background-color: #404032;
   }
   
   /* Tagline alineado a la derecha */
@@ -152,23 +152,34 @@
     position: relative;
   }
   
-  #slideshow {
-    position: relative;
+  .slideshow-container {
+    position: absolute;
+    width: 100%;
     height: 100%;
-    overflow: hidden;
+    z-index: 0;
+  }
+  
+  #slideshow {
+    width: 100%;
+    height: 100%;
+    position: relative;
   }
   
   .slide {
     position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
     opacity: 0;
     transition: opacity 2s ease-in-out;
+    object-fit: cover;
+    display: block;
   }
   
   .slide.active {
     opacity: 1;
+    z-index: 1;
   }
   
   /* Animación de las ilustraciones */
@@ -194,34 +205,80 @@
   
   /* Ensure popups appear above illustrations */
   .popup {
-    z-index: 20;
-  }
-  
-  /* Estilos del popup */
-  .popup {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(0.9);
-    background-color: #F5F4F3;
-    padding: 30px;
+    transform: translate(-50%, -50%);
+    background-color: #f5f4f3;
+    padding: 2rem;
     border-radius: 8px;
-    max-width: 80%;
-    width: 400px;
-    max-height: 80vh;
+    max-width: 90%;
+    width: 500px;
+    max-height: 90vh;
     overflow-y: auto;
+    z-index: 2000; /* Increased z-index */
+    color: #f5f4f3;
     display: flex;
     flex-direction: column;
-    z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    gap: 1rem;
   }
   
-  .popup.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translate(-50%, -50%) scale(1);
+  .popup.hidden {
+    display: none;
+  }
+  
+  /* Close button styles */
+  .close-popup {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: #F5F4F3;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.5rem;
+    z-index: 2001; /* Ensure it's above popup content */
+  }
+  
+  /* Popup content styles */
+  .popup-content {
+    width: 100%;
+  }
+  
+  /* Mobile adjustments */
+  @media (max-width: 768px) {
+    .popup {
+      width: 90%;
+      max-height: 80vh;
+      padding: 1.5rem;
+    }
+  }
+  
+  /* Ensure proper stacking context */
+  .illustrations-container {
+    pointer-events: none;
+    z-index: 1;
+  }
+  
+  .illustration-wrapper {
+    pointer-events: auto;
+  }
+  
+  .slideshow-container {
+    z-index: 0;
+  }
+  
+  /* Add a backdrop when popup is open */
+  .popup:not(.hidden)::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #F5F4F3;
+    z-index: -1;
   }
   
   .popup-header {
@@ -246,7 +303,7 @@
     border: none;
     color: #404032;
     cursor: pointer;
-    font-size: 0.9em;
+    font-size: 0.8em;
     font-family: 'Akkurat', sans-serif;
     text-transform: capitalize;
     letter-spacing: 1px;
@@ -260,7 +317,7 @@
   }
   
   .popup::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: #F5F4F3;
   }
   
   .popup::-webkit-scrollbar-thumb {
@@ -787,24 +844,197 @@ nav ul li a:hover::after {
 }
 
 .illustrations-container {
-  position: relative;
-  overflow-y: auto; /* Enable vertical scrolling */
-  overflow-x: hidden;
-  max-height: 100vh; /* Limit height to viewport */
-  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+  cursor: grab;
 }
 
 .illustration-wrapper {
-  touch-action: pan-x pan-y; /* Enable touch gestures */
-  cursor: grab; /* Show grab cursor for dragging */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: scrollIllustrations 60s linear infinite;
 }
 
-@media (max-width: 768px) {
-  .illustrations-container {
-    overflow-x: auto; /* Enable horizontal scrolling on mobile */
-    overflow-y: hidden;
-    white-space: nowrap;
+.illustration {
+  width: 100%;
+  max-width: 400px; /* Increased from 200px */
+  margin-bottom: 40px; /* Increased spacing */
+  opacity: 1;
+  pointer-events: none; /* Ensures clicks go through to container */
+}
+
+@keyframes scrollIllustrations {
+  0% {
+    transform: translateY(0);
   }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .left-side {
+    width: 100%;
+    min-height: 60vh;
+  }
+
+  .right-side {
+    width: 100%;
+    height: 40vh;
+    position: relative;
+  }
+
+  .main-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .illustrations-container {
+    position: absolute;
+    top: -15vh; 
+    height: 50vh;
+    width: 100%;
+    overflow-x: hidden;
+    white-space: nowrap;
+    z-index: 1;
+  }
+
+  .illustration-wrapper {
+    flex-direction: row;
+    width: max-content;
+    animation: scrollHorizontal 40s linear infinite;
+    position: relative; /* Added this */
+  }
+
+  .illustration {
+    display: inline-block;
+    margin: 0 30px;
+    max-width: 300px;
+    opacity: 1;
+  }
+
+  @keyframes scrollHorizontal {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+/* Update illustration container styles */
+.illustrations-container {
+  pointer-events: none; /* Allows clicks to pass through */
+  z-index: 1;
+}
+
+.illustration-wrapper {
+  pointer-events: auto; /* Restores pointer events for dragging */
+}
+
+/* Ensure links and buttons remain clickable */
+a, button, .popup {
+  position: relative;
+  z-index: 2;
+}
+
+.illustrations-container {
+  pointer-events: none;
+  z-index: 1;
+}
+
+.illustration-wrapper {
+  pointer-events: auto;
+}
+
+/* Ensure proper layering */
+.popup:not(.hidden) {
+  z-index: 1000;
+}
+
+.emoji {
+  z-index: 999;
+}
+
+/* Popup styles */
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #F5F4F3;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 90%;
+  width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  z-index: 2000; /* Increased z-index */
+  color: #F5F4F3;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.popup.hidden {
+  display: none;
+}
+
+/* Close button styles */
+.close-popup {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: #F5F4F3;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.5rem;
+  z-index: 2001; /* Ensure it's above popup content */
+}
+
+/* Popup content styles */
+.popup-content {
+  width: 100%;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .popup {
+    width: 90%;
+    max-height: 80vh;
+    padding: 1.5rem;
+  }
+}
+
+/* Ensure proper stacking context */
+.illustrations-container {
+  pointer-events: none;
+  z-index: 1;
+}
+
+.illustration-wrapper {
+  pointer-events: auto;
 }
 
 
