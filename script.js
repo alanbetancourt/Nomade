@@ -39,23 +39,6 @@ document.addEventListener('click', (e) => {
 document.addEventListener('DOMContentLoaded', closeAllPopups);
 
 // Slideshow functionality
-const slides = document.querySelectorAll('.slide');
-let currentSlide = 0;
-
-function showSlide(index) {
-  slides.forEach((slide, i) => {
-    slide.classList.toggle('active', i === index);
-  });
-}
-
-function nextSlide() {
-  currentSlide = (currentSlide + 1) % slides.length;
-  showSlide(currentSlide);
-}
-
-setInterval(nextSlide, 5000); // Change slide every 5 seconds
-
-// Smooth scroll effect
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
     e.preventDefault();
@@ -134,10 +117,46 @@ class Slideshow {
   }
 }
 
-// Initialize slideshow
-document.addEventListener('DOMContentLoaded', () => {
-  const slideshowContainer = document.querySelector('.slideshow-container');
-  if (slideshowContainer) {
-    new Slideshow(slideshowContainer);
+class IllustrationScroller {
+  constructor() {
+    this.container = document.querySelector('.illustrations-container');
+    this.wrapper = document.querySelector('.illustration-wrapper');
+    
+    // Clone illustrations for infinite loop
+    const originalContent = this.wrapper.innerHTML;
+    this.wrapper.innerHTML = originalContent + originalContent;
+
+    // Handle scroll position
+    this.container.addEventListener('scroll', () => {
+      if (window.innerWidth <= 768) {
+        this.handleHorizontalScroll();
+      } else {
+        this.handleVerticalScroll();
+      }
+    });
   }
+
+  handleVerticalScroll() {
+    const maxScroll = this.wrapper.offsetHeight / 2;
+    if (this.container.scrollTop >= maxScroll) {
+      this.container.scrollTop = 0;
+    } else if (this.container.scrollTop <= 0) {
+      this.container.scrollTop = maxScroll;
+    }
+  }
+
+  handleHorizontalScroll() {
+    const maxScroll = this.wrapper.offsetWidth / 2;
+    if (this.container.scrollLeft >= maxScroll) {
+      this.container.scrollLeft = 0;
+    } else if (this.container.scrollLeft <= 0) {
+      this.container.scrollLeft = maxScroll;
+    }
+  }
+}
+
+// Initialize both components
+document.addEventListener('DOMContentLoaded', () => {
+  new IllustrationScroller();
+  new Slideshow();
 });

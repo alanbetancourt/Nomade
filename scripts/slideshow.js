@@ -1,29 +1,28 @@
 class Slideshow {
   constructor() {
-    this.currentIndex = 0;
-    this.container = document.querySelector('.slideshow-container');
-    this.images = this.container.querySelectorAll('.slideshow-image');
+    this.container = document.querySelector('#slideshow');
+    if (!this.container) {
+      console.error('Slideshow container not found');
+      return;
+    }
     
-    // Add click/tap handler
-    this.container.addEventListener('click', () => this.showNextImage());
+    this.slides = Array.from(this.container.querySelectorAll('.slide'));
+    this.currentIndex = 0;
+    
+    // Initialize click/tap handler
+    this.container.addEventListener('click', () => this.showNextSlide());
   }
 
-  showNextImage() {
-    // Hide current image
-    this.images[this.currentIndex].classList.remove('active');
+  showNextSlide() {
+    // Hide current slide
+    this.slides[this.currentIndex].classList.remove('active');
     
-    // Update index
-    this.currentIndex = (this.currentIndex + 1) % this.images.length;
+    // Update index (loop back to start if needed)
+    this.currentIndex = (this.currentIndex + 1) % this.slides.length;
     
-    // Show next image
-    this.images[this.currentIndex].classList.add('active');
+    // Show next slide
+    this.slides[this.currentIndex].classList.add('active');
   }
 }
 
-// Initialize slideshow
-document.addEventListener('DOMContentLoaded', () => {
-  const slideshowContainer = document.querySelector('.slideshow-container');
-  if (slideshowContainer) {
-    new Slideshow(slideshowContainer);
-  }
-}); 
+// Don't initialize here - it's now handled in script.js 
