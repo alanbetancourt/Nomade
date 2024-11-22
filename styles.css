@@ -921,7 +921,7 @@ nav ul li a:hover::after {
     flex-direction: row;
     width: max-content;
     animation: scrollHorizontal 40s linear infinite;
-    position: relative; /* Added this */
+    display: flex;
   }
 
   .illustration {
@@ -933,11 +933,19 @@ nav ul li a:hover::after {
 
   @keyframes scrollHorizontal {
     0% {
-      transform: translateX(0);
-    }
-    100% {
       transform: translateX(-50%);
     }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  /* Add this new rule to duplicate illustrations for seamless scrolling */
+  .illustration-wrapper::after {
+    content: '';
+    display: block;
+    width: 100%;
+    flex-shrink: 0;
   }
 }
 
