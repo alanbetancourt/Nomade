@@ -1,0 +1,35 @@
+.illustrations-container {
+  position: relative;
+  overflow-y: auto; /* Enable vertical scrolling */
+  overflow-x: hidden;
+  max-height: 100vh; /* Limit height to viewport */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+.illustration-wrapper {
+  touch-action: pan-x pan-y; /* Enable touch gestures */
+  cursor: grab; /* Show grab cursor for dragging */
+}
+
+@media (max-width: 768px) {
+  .illustrations-container {
+    overflow-x: auto; /* Enable horizontal scrolling on mobile */
+    overflow-y: hidden;
+    white-space: nowrap;
+  }
+}
+
+.slideshow-container {
+  position: relative;
+  cursor: pointer;
+}
+
+.slideshow-image {
+  display: none;
+  width: 100%;
+  height: auto;
+}
+
+.slideshow-image.active {
+  display: block;
+} 

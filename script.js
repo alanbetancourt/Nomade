@@ -111,3 +111,33 @@ document.addEventListener('keydown', (e) => {
 if (window.addEventListener) {
   document.body.classList.remove('no-js');
 }
+
+class Slideshow {
+  constructor(container) {
+    this.container = container;
+    this.slides = Array.from(container.querySelectorAll('.slide'));
+    this.currentIndex = 0;
+    
+    // Initialize click/tap handler
+    this.container.addEventListener('click', () => this.showNextSlide());
+  }
+
+  showNextSlide() {
+    // Hide current slide
+    this.slides[this.currentIndex].classList.remove('active');
+    
+    // Update index (loop back to start if needed)
+    this.currentIndex = (this.currentIndex + 1) % this.slides.length;
+    
+    // Show next slide
+    this.slides[this.currentIndex].classList.add('active');
+  }
+}
+
+// Initialize slideshow
+document.addEventListener('DOMContentLoaded', () => {
+  const slideshowContainer = document.querySelector('.slideshow-container');
+  if (slideshowContainer) {
+    new Slideshow(slideshowContainer);
+  }
+});
