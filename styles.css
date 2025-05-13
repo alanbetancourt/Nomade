@@ -1045,6 +1045,60 @@ a, button, .popup {
   pointer-events: auto;
 }
 
+.menu-section {
+  margin: 2rem 0;
+}
+
+.menu-section h3 {
+  font-family: 'Aether Mono', monospace;
+  color: #404032;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.menu-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.menu-section li {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  color: #404032;
+  font-family: 'Akkurat', sans-serif;
+  text-transform: capitalize;
+}
+
+.menu-section .price {
+  font-family: 'Aether Mono', monospace;
+}
+
+.menu-divider {
+  text-align: center;
+  color: #404032;
+  margin: 2rem 0;
+  font-family: 'Aether Mono', monospace;
+}
+
+.menu-section .note {
+  text-align: center;
+  font-style: italic;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .menu-section {
+    margin: 1.5rem 0;
+  }
+  
+  .menu-section li {
+    font-size: 0.9rem;
+  }
+}
+
 
 
 
