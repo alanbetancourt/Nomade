@@ -1099,50 +1099,6 @@ a, button, .popup {
   }
 }
 
-.reservation-policy {
-  margin: 2rem 0;
-  text-align: left;
-}
-
-.reservation-policy p {
-  margin-bottom: 1rem;
-  color: #404032;
-  font-family: 'Akkurat', sans-serif;
-  line-height: 1.5;
-  text-transform: none; /* Ensure no text transformation */
-}
-
-.continue-reservation {
-  display: block;
-  width: 100%;
-  padding: 1rem;
-  background-color: #404032;
-  color: #F5F4F3;
-  border: none;
-  border-radius: 4px;
-  font-family: 'Aether Mono', monospace;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: 2rem;
-  text-transform: none; /* Ensure no text transformation */
-}
-
-.continue-reservation:hover {
-  background-color: #2c2c23;
-}
-
-@media (max-width: 768px) {
-  .reservation-policy p {
-    font-size: 0.9rem;
-  }
-  
-  .continue-reservation {
-    padding: 0.8rem;
-    font-size: 0.9rem;
-  }
-}
-
 
 
 
